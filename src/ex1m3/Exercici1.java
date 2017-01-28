@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 
 public class Exercici1 {
 
-    private Element e;
+    private final Element e;
 
     public Exercici1(Element e) {
         this.e = e;
@@ -63,9 +63,9 @@ public class Exercici1 {
      */
     public String[] arrayNomAtributs() {
         String[] nomAtributs = new String[arrayAtribsField().length];
-        Field[] att = arrayAtribsField();
+        Field[] atrib = arrayAtribsField();
         for (int i = 0; i < nomAtributs.length; i++) {
-            nomAtributs[i] = att[i].getName();
+            nomAtributs[i] = atrib[i].getName();
         }
         return nomAtributs;
     }
@@ -77,9 +77,9 @@ public class Exercici1 {
      */
     public String[] arrayNomMetodes() {
         String[] nomMetodes = new String[arrayMetodes().length];
-        Method[] meth = arrayMetodes();
+        Method[] method = arrayMetodes();
         for (int i = 0; i < nomMetodes.length; i++) {
-            nomMetodes[i] = meth[i].getName();
+            nomMetodes[i] = method[i].getName();
         }
         return nomMetodes;
     }
@@ -91,9 +91,9 @@ public class Exercici1 {
      */
     public int[] modAtribut() {
         int[] nomMetodes = new int[arrayMetodes().length];
-        Method[] meth = arrayMetodes();
+        Method[] method = arrayMetodes();
         for (int i = 0; i < nomMetodes.length; i++) {
-            nomMetodes[i] = meth[i].getModifiers();
+            nomMetodes[i] = method[i].getModifiers();
         }
         return nomMetodes;
     }
@@ -103,33 +103,49 @@ public class Exercici1 {
      *
      * @return
      */
-    
+    public int[] modMetode() {
+        int[] modModificador = new int[arrayAtribsField().length];
+        Field[] field = arrayAtribsField();
+        for (int i = 0; i < modModificador.length; i++) {
+            modModificador[i] = field[i].getModifiers();
+        }
+        return modModificador;
+    }
+
     /**
      * Modificar el valor d'un atribut.
      *
+     * @param posicio
+     * @param valors
      * @return
      */
-    
+    public int[] modValorAtribut(int posicio, int valors) {
+        int[] modVal = new int[arrayAtribsField().length];
+        //modVal[posicio] = valors;
+        return modVal;
+    }
+
     /**
      * Executar un dels seus mètodes.
      *
+     * @return
      */
-    public void executarMetodes() {
-        e.getCad();
+    public String executarMetodes() {
+        return e.getCad();
     }
-    
+
     /**
      * Crear una instància.
      *
      */
     public void crearInstancia() {
-        
+        System.out.println(new Element(2, "Hola"));
     }
-    
+
     /**
      * Crear objecte clonat
      *
-     * @return 
+     * @return
      * @throws java.lang.CloneNotSupportedException
      */
     @Override
