@@ -115,14 +115,11 @@ public class Exercici1 {
     /**
      * Modificar el valor d'un atribut.
      *
-     * @param posicio
-     * @param valors
+     * @param nouValor
      * @return
      */
-    public int[] modValorAtribut(int posicio, int valors) {
-        int[] modVal = new int[arrayAtribsField().length];
-        //modVal[posicio] = valors;
-        return modVal;
+    public String modValorAtribut(String nouValor) {
+        return null; //NO SE QUE HACER
     }
 
     /**
