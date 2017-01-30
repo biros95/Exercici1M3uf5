@@ -1,12 +1,13 @@
 package ex1m3;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class Exercici1 {
-
+    
     private Element e;
-
+    
     public Exercici1(Element e) {
         this.e = e;
     }
@@ -62,8 +63,8 @@ public class Exercici1 {
      * @return
      */
     public String[] arrayNomAtributs() {
-        String[] nomAtributs = new String[arrayAtribsField().length];
         Field[] atrib = arrayAtribsField();
+        String[] nomAtributs = new String[atrib.length];
         for (int i = 0; i < nomAtributs.length; i++) {
             nomAtributs[i] = atrib[i].getName();
         }
@@ -76,8 +77,8 @@ public class Exercici1 {
      * @return
      */
     public String[] arrayNomMetodes() {
-        String[] nomMetodes = new String[arrayMetodes().length];
         Method[] method = arrayMetodes();
+        String[] nomMetodes = new String[method.length];
         for (int i = 0; i < nomMetodes.length; i++) {
             nomMetodes[i] = method[i].getName();
         }
@@ -90,12 +91,12 @@ public class Exercici1 {
      * @return
      */
     public int[] modAtribut() {
-        int[] nomMetodes = new int[arrayMetodes().length];
         Method[] method = arrayMetodes();
-        for (int i = 0; i < nomMetodes.length; i++) {
-            nomMetodes[i] = method[i].getModifiers();
+        int[] modAtribut = new int[method.length];
+        for (int i = 0; i < modAtribut.length; i++) {
+            modAtribut[i] = method[i].getModifiers();
         }
-        return nomMetodes;
+        return modAtribut;
     }
 
     /**
@@ -104,40 +105,45 @@ public class Exercici1 {
      * @return
      */
     public int[] modMetode() {
-        int[] modModificador = new int[arrayAtribsField().length];
         Field[] field = arrayAtribsField();
-        for (int i = 0; i < modModificador.length; i++) {
-            modModificador[i] = field[i].getModifiers();
+        int[] modMetode = new int[field.length];
+        for (int i = 0; i < modMetode.length; i++) {
+            modMetode[i] = field[i].getModifiers();
         }
-        return modModificador;
+        return modMetode;
     }
 
     /**
      * Modificar el valor d'un atribut.
      *
+     * @param atribut
      * @param nouValor
-     * @return
+     * @throws java.lang.IllegalAccessException
      */
-    public String modValorAtribut(String nouValor) {
-        return null; //NO SE QUE HACER
+    public void modValorAtribut(Field atribut, Object nouValor) throws IllegalArgumentException, IllegalAccessException {
+        atribut.setAccessible(true);
+        atribut.set(e, nouValor);
     }
 
     /**
      * Executar un dels seus mètodes.
      *
-     * @return
+     * @param metode
      */
-    public String executarMetodes() {
-        return e.getCad();
+    public void executarMetodes(Method metode) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        metode.setAccessible(true);
+        metode.invoke(e, null);
     }
 
     /**
      * Crear una instància.
      *
+     * @return
+     * @throws java.lang.InstantiationException
+     * @throws java.lang.IllegalAccessException
      */
-    public void crearInstancia() {
-        e = new Element(2,"Hola");
-        //System.out.println(e);
+    public Element crearInstancia() throws InstantiationException, IllegalAccessException {
+        return e.getClass().newInstance();
     }
 
     /**
