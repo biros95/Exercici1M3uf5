@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 
 public class Exercici1 {
 
-    private final Element e;
+    private Element e;
 
     public Exercici1(Element e) {
         this.e = e;
@@ -136,7 +136,8 @@ public class Exercici1 {
      *
      */
     public void crearInstancia() {
-        System.out.println(new Element(2, "Hola"));
+        e = new Element(2,"Hola");
+        //System.out.println(e);
     }
 
     /**
